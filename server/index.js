@@ -6,14 +6,22 @@ const app = express();
 // Let's build the path to our front end files so Heroku can access them.
 // Middleware
 // You can server entire folders using middleware.
-app.use(express.static(path.join(__dirname, "../client")));
+app.use("/", express.static(path.join(__dirname, "../client")));
 
 
 // Endpoints
 // You can ONLY serve specific files using endpoints.
-// app.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../client/index.html"))
-// })
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/index.html"))
+})
+
+app.get("/styles", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/index.css"))
+})
+
+app.get("/js", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/main.js"))
+})
 
 /*
     When Heroku deploys our app, it will provide its own port number. 
